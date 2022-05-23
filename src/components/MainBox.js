@@ -1,8 +1,23 @@
-import React from "react";
+import { useState } from "react";
 import MenuBar from "./MenuBar";
 import { Profile, Photos, Cocktails, Pokemon } from "./pages";
 
 function MainBox() {
+  const [menuItem, setMenuItem ] = useState("Profile")
+  const menuMap = {
+    Profile: <Profile/>,
+    Photos: <Photos/>,
+    Cocktails: <Cocktails/>,
+    Pokemon: <Pokemon/>
+  }
+
+  const handleClick = (selection, e) => {
+    setMenuItem(selection)
+    // document.getElementsByClassName("item active").className = "item"
+    // console.log(document.getElementsByClassName("item active"))
+    // e.target.className = "item active"
+  }
+
   /*
     Replace the code below! Depending on what menu item is selected in the menu, 
     I should render either a Profile, Photos, Cocktails, or Pokemon component.
@@ -12,11 +27,11 @@ function MainBox() {
     - Where should these methods be called?
   */
 
-  let detailsToDisplay = <div>Hi, I'm a div!</div>;
+  let detailsToDisplay = <div> {menuMap[menuItem]} </div>;
 
   return (
     <div>
-      <MenuBar />
+      <MenuBar clickHandle= {handleClick} selected = {menuItem}/>
       {detailsToDisplay}
     </div>
   );
